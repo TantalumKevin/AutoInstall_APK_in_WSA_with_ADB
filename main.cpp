@@ -44,7 +44,8 @@ int main(int argc, char** argv)
         char install[1024] = "adb install \"";
         for(int i = 1;i<argc;i++)
         {
-            cout<<"正在安装第 "<<argc<<" 个安装包: "<<argv[i]<<endl;
+            char install[1024] = "adb install \"";
+            cout<<"正在安装第 "<<i<<" 个安装包: "<<endl<<argv[i]<<endl;
             strcat(install,argv[i]);
             strcat(install,"\"");
             strcpy(ptr,install);
@@ -55,12 +56,11 @@ int main(int argc, char** argv)
                     cout<<cmd;
                     if(!strcmp(cmd,"Success\n"))
                         cout<<"安装成功"<<endl;
-                    else
-                        cout<<"安装失败"<<endl;
                 }
 
         }
     }
     _pclose(file);
+    system("pause");
     return 0;
 }
