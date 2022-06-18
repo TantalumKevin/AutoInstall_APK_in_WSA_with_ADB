@@ -37,9 +37,12 @@ int main(int argc, char** argv)
         cout<<"连接成功,正在尝试安装……"<<endl;
         //argc>=1
         //argv第一个内容为主程序地址
-        cout<<"已检测到 "<<argc<<" 个.apk文件,安装启动中……请稍后"<<endl;
+        if(argc-1)
+            cout<<"已检测到 "<<argc-1<<" 个apk文件,安装启动中……请稍后"<<endl;
+        else
+            cout<<"未检测到apk文件,请检查输入"<<endl;
         char install[1024] = "adb install \"";
-        for(int i = 1;i<=argc;i++)
+        for(int i = 1;i<argc;i++)
         {
             cout<<"正在安装第 "<<argc<<" 个安装包: "<<argv[i]<<endl;
             strcat(install,argv[i]);
