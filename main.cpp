@@ -53,9 +53,15 @@ int main(int argc, char** argv)
             //执行一次指令
                 while (fgets(cmd, 1024, file) != NULL)
                 {    //读一行输出
-                    cout<<cmd;
-                    if(!strcmp(cmd,"Success\n"))
+                    if(!strcmp(cmd,"Performing Streamed Install\n"))
+                        cout<<"正在安装中，请稍后……"<<endl;
+                    else if(!strcmp(cmd,"Success\n"))
                         cout<<"安装成功"<<endl;
+                    else
+                    {
+                        cout<<cmd;
+                        cout<<"安装时遇到问题"<<endl;
+                    }
                 }
 
         }
