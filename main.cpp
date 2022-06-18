@@ -35,19 +35,27 @@ int main(int argc, char** argv)
     else if(flag==0)
     {
         cout<<"连接成功,正在尝试安装……"<<endl;
-        for(int i = 1;i<argc;i++)
+        //argc>=1
+        //argv第一个内容为主程序地址
+        cout<<"已检测到 "<<argc<<" 个.apk文件,安装启动中……请稍后"<<endl;
+        char install[1024] = "adb install \"";
+        for(int i = 1;i<=argc;i++)
         {
-            //argc>=1
-            //argv第一个内容为主程序地址
-            //cout<<"argc="<<argc<<endl;
-            //for(int i = 0;i<=argc;i++)
-                //cout<<argv[i]<<endl;
-            //int i = system("py");
-            //cout<<i<<endl;
-            /*
-            for(int i = 1;i<argc;i++)
-                ;
-                */
+            cout<<"正在安装第 "<<argc<<" 个安装包: "<<argv[i]<<endl;
+            strcat(install,argv[i]);
+            strcat(install,"\"");
+            strcpy(ptr,install);
+            if ((file = _popen(ptr, "r")) != NULL)
+            //执行一次指令
+                while (fgets(cmd, 1024, file) != NULL)
+                {    //读一行输出
+                    cout<<cmd;
+                    if(!strcmp(cmd,"Success\n"))
+                        cout<<"安装成功"<<endl;
+                    else
+                        cout<<"安装失败"<<endl;
+                }
+
         }
     }
     _pclose(file);
