@@ -49,12 +49,13 @@ int main(int argc, char** argv)
             strcat(install,argv[i]);
             strcat(install,"\"");
             strcpy(ptr,install);
+            cout<<"正在安装中，请稍后……"<<endl;
             if ((file = _popen(ptr, "r")) != NULL)
             //执行一次指令
                 while (fgets(cmd, 1024, file) != NULL)
                 {    //读一行输出
                     if(!strcmp(cmd,"Performing Streamed Install\n"))
-                        cout<<"正在安装中，请稍后……"<<endl;
+                        continue;
                     else if(!strcmp(cmd,"Success\n"))
                         cout<<"安装成功"<<endl;
                     else
@@ -63,7 +64,6 @@ int main(int argc, char** argv)
                         cout<<"安装时遇到问题"<<endl;
                     }
                 }
-
         }
     }
     _pclose(file);
